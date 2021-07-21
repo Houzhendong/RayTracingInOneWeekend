@@ -65,7 +65,7 @@ public:
     }
 };
 
-using point3f = vec3; //3D point
+using point3 = vec3; //3D point
 using color = vec3;
 
 // vec3 Utility Functions

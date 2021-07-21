@@ -8,7 +8,7 @@ int main()
     const int image_width = 256;
     const int image_height = 256;
 
-    std::string file = "image2.ppm";
+    std::string file = "image.ppm";
     std::fstream filestream(file, std::ios::in | std::ios::binary | std::ios::app);
 
     if (!filestream.is_open())
