@@ -5,10 +5,29 @@
 #include <iostream>
 #include <fstream>
 
+double hit_sphere(const point3 &center, double radius, const ray &r)
+{
+    vec3 oc = r.origin() - center;
+    auto a = r.direction().length_squared();
+    auto half_b = dot(oc, r.direction());
+    auto c = oc.length_squared() - radius * radius;
+    auto delta = half_b * half_b - 4 * a * c;
+    if (delta < 0)
+        return -1.0;
+    else
+        return (-half_b - sqrt(delta)) / a;
+}
+
 color ray_color(const ray &r)
 {
+    auto t = hit_sphere(point3(0, 0, -1), 0.5, r);
+    if (t > 0)
+    {
+        vec3 normal = (r.at(t) - vec3(0, 0, -1)).normalized();
+        return 0.5 * color(normal.x() + 1, normal.y() + 1, normal.z() + 1);
+    }
     vec3 unit_direction = r.direction().normalized();
-    auto t = 0.5 * (unit_direction.y() + 1.0);
+    t = 0.5 * (unit_direction.y() + 1.0);
     return (1.0 - t) * color(1.0, 1.0, 1.0) + t * color(0.5, 0.7, 1.0);
 }
 
@@ -20,7 +39,7 @@ int main()
     const int image_height = static_cast<int>(image_width / aspect_ratio);
 
     // File stream
-    std::string file = "image.ppm";
+    std::string file = "6.Surface Normals and Multiple Objects.ppm";
     std::fstream filestream(file, std::ios::in | std::ios::binary | std::ios::app);
 
     if (!filestream.is_open())

@@ -1,0 +1,12 @@
+{
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+    "cmake.configureSettings": {
+        "VCPKG_TARGET_TRIPLET": "x64-windows"
+    },
+    "C_Cpp.default.intelliSenseMode": "windows-msvc-x64",
+    "files.associations": {
+        "iosfwd": "cpp",
+        "fstream": "cpp",
+        "istream": "cpp"
+    },
+}
